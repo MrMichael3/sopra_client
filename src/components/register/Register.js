@@ -65,7 +65,8 @@ class Register extends React.Component {
         super();
         this.state = {
             name: null,
-            username: null
+            username: null,
+            password: null
         };
     }
     /**
