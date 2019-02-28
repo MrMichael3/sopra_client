@@ -26,10 +26,9 @@ const Form = styled.div`
   padding-left: 37px;
   padding-right: 37px;
   border-radius: 5px;
-  background: linear-gradient(rgb(27, 124, 186), rgb(2, 46, 101));
+  background: linear-gradient(rgb(27, 124, 0), rgb(2, 46, 101));
   transition: opacity 0.5s ease, transform 0.5s ease;
 `;
-
 const InputField = styled.input`
   &::placeholder {
     color: rgba(255, 255, 255, 0.2);
@@ -40,7 +39,7 @@ const InputField = styled.input`
   border: none;
   border-radius: 20px;
   margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 1, 0.2);
   color: white;
 `;
 
@@ -110,6 +109,10 @@ class Login extends React.Component {
         }
       });
   }
+  register(){
+    this.props.history.push('/register');
+
+  }
 
   /**
    *  Every time the user enters something in the input field, the state gets updated.
@@ -159,6 +162,16 @@ class Login extends React.Component {
                 }}
               >
                 Login
+              </Button>
+            </ButtonContainer>
+            <ButtonContainer>
+              <Button
+                  width="50%"
+                  onClick={() => {
+                    this.register();
+                  }}
+                >
+                Register
               </Button>
             </ButtonContainer>
           </Form>
