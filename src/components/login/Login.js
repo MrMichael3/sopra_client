@@ -5,6 +5,7 @@ import { getDomain } from "../../helpers/getDomain";
 import User from "../shared/models/User";
 import { withRouter } from "react-router-dom";
 import { Button } from "../../views/design/Button";
+//import {register} from "react-scripts/template-typescript/src/serviceWorker";
 
 const FormContainer = styled.div`
   margin-top: 2em;
@@ -82,11 +83,11 @@ class Login extends React.Component {
    * HTTP POST request is sent to the backend.
    * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
    */
-  login() {
+  /*login() {
 
 
     fetch(`${getDomain()}/users`, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
@@ -110,12 +111,43 @@ class Login extends React.Component {
           alert(`Something went wrong during the login: ${err.message}`);
         }
       });
+  }*/
+  login() {
+    //fetch: username + pw an server übergeben
+    //return true => token erstellen, weiterleiten
+    //return false => fehlermeldung
+    fetch('getDomain()}/users/Id', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password
+      })
+    })
+    //To Do
+        //.then(response => response.json())
+        .then(answer => {
+          alert(answer.type);
+
+          //console.log(answer);
+          // boolean x = answer;
+          //if(answer. == true){
+           // this.props.history.push('/game');
+          //}
+    })
+        .catch(err => {
+          alert(`Something went wrong during the login: ${err.message}`);
+
+
+        });
+    this.props.history.push('/login');
   }
+//redirect to the register
   register(){
     this.props.history.push('/register');
-
   }
-
   /**
    *  Every time the user enters something in the input field, the state gets updated.
    * @param key (the key of the state for identifying the field that needs to be updated)

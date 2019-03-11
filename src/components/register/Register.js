@@ -88,6 +88,7 @@ class Register extends React.Component {
         })
             .then(response => response.json())
             .then(addUser => {
+                console.log(addUser);
                 const user = new User(addUser);
                 this.props.history.push(`/login`);
             })
