@@ -75,19 +75,19 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: null,
-      username: null
+      username: null,
+      password: null
     };
   }
   /**
    * HTTP POST request is sent to the backend.
    * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
    */
-  /*login() {
+  login() {
 
 
-    fetch(`${getDomain()}/users`, {
-      method: "POST",
+    fetch(`${getDomain()}/users/validation`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
@@ -98,11 +98,18 @@ class Login extends React.Component {
     })
         .then(response => response.json())
         .then(returnedUser => {
-        const user = new User(returnedUser);
-        // store the token into the local storage
-        localStorage.setItem("token", user.token);
-        // user login successfully worked --> navigate to the route /game in the GameRouter
-        this.props.history.push(`/game`);
+          //console.log(returnedUser);
+          // check if successfully logged in
+          if(returnedUser.token === "") {
+            console.log("LOGIN FAILED");
+            alert("wrong username or password!")
+          }else{
+            console.log(returnedUser);
+            // store the token into the local storage
+            localStorage.setItem("token", returnedUser.token);
+            // user login successfully worked --> navigate to the route /game in the GameRouter
+            this.props.history.push(`/game`);
+          }
       })
       .catch(err => {
         if (err.message.match(/Failed to fetch/)) {
@@ -111,39 +118,8 @@ class Login extends React.Component {
           alert(`Something went wrong during the login: ${err.message}`);
         }
       });
-  }*/
-  login() {
-    //fetch: username + pw an server übergeben
-    //return true => token erstellen, weiterleiten
-    //return false => fehlermeldung
-    fetch('getDomain()}/users/Id', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password
-      })
-    })
-    //To Do
-        //.then(response => response.json())
-        .then(answer => {
-          alert(answer.type);
-
-          //console.log(answer);
-          // boolean x = answer;
-          //if(answer. == true){
-           // this.props.history.push('/game');
-          //}
-    })
-        .catch(err => {
-          alert(`Something went wrong during the login: ${err.message}`);
-
-
-        });
-    this.props.history.push('/login');
   }
+
 //redirect to the register
   register(){
     this.props.history.push('/register');
@@ -166,7 +142,8 @@ class Login extends React.Component {
    * You may call setState() immediately in componentDidMount().
    * It will trigger an extra rendering, but it will happen before the browser updates the screen.
    */
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   render() {
     return (
