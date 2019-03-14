@@ -29,8 +29,10 @@ class Profile extends React.Component {
         super();
         this.state = {
             user: null,
-            username: "test",
-            userId: null
+            username: null,
+            userId: null,
+            birthday: null,
+            creationDate: null
         };
     }
 
@@ -56,21 +58,30 @@ class Profile extends React.Component {
     return() {
         this.props.history.push("/game");
     }
+    edit(){
+        //change user data if allowed
+    }
 
     render() {
         return (
             <Container>
                 <h2>User Profile </h2>
-                <p>See profile of: {this.state.username}</p>
                 {!this.state.user ? (
                     <Spinner/>
                 ) : (
                     <div>
                         <p>Username: {this.state.user.username}</p>
-                        <p>Username: {this.state.user.creationDay}</p>
-                        <p>Username: {this.state.user.birthday}</p>
-                        <p>Username: {this.state.user.status}</p>
-                        <p>Username: {this.state.user.username}</p>
+                        <p>Created on: {this.state.user.creationDate}</p>
+                        <p>Birthday: {this.state.user.birthday}</p>
+                        <p>Status: {this.state.user.status}</p>
+                        <Button
+                            width="50%"
+                            onClick={()=>{
+                                this.edit();
+                            }}
+                            >
+                            Edit
+                        </Button>
                         <Button
                             width="100%"
                             onClick={() => {

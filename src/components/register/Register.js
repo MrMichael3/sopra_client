@@ -64,7 +64,6 @@ class Register extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: null,
             username: null,
             password: null
         };
@@ -82,14 +81,13 @@ class Register extends React.Component {
             },
             body: JSON.stringify({
                 username: this.state.username,
-                name: this.state.name,
                 password: this.state.password
             })
         })
             .then(response => response.json())
             .then(addUser => {
                 console.log(addUser);
-                const user = new User(addUser);
+                //const user = new User(addUser);
                 this.props.history.push(`/login`);
             })
             .catch(err => {
@@ -128,13 +126,6 @@ render() {
                             this.handleInputChange("username", e.target.value);
                         }}
                     />
-                    <Label>Name</Label>
-                    <InputField
-                        placeholder="Enter here.."
-                        onChange={e => {
-                            this.handleInputChange("name", e.target.value);
-                        }}
-                    />
                     <Label>Password</Label>
                     <InputField
                         placeholder="Enter here.."
@@ -145,7 +136,7 @@ render() {
                     <ButtonContainer>
                         <Button
                             width="50%"
-                            disabled={!this.state.username || !this.state.name || !this.state.password}
+                            disabled={!this.state.username || !this.state.password}
                             onClick={() => {
                                 this.register();
                             }}
