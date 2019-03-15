@@ -86,9 +86,9 @@ class Register extends React.Component {
         })
             .then(response => response.json())
             .then(addUser => {
-                console.log(addUser);
-                //const user = new User(addUser);
-                this.props.history.push(`/login`);
+                    console.log(addUser);
+                    //const user = new User(addUser);
+                    this.props.history.push(`/login`);
             })
             .catch(err => {
                 if (err.message.match(/Failed to fetch/)) {
@@ -98,6 +98,7 @@ class Register extends React.Component {
                 }
             });
         this.props.history.push('/register');
+
 
     }
 
