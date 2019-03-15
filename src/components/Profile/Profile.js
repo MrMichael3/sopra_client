@@ -38,11 +38,12 @@ class Profile extends React.Component {
 
     componentDidMount() {
         const userId = this.props.match.params.id;
+        console.log(userId);
         fetch(`${getDomain()}/users/${userId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": localStorage.getItem('token')
+                //"Authorization": localStorage.getItem('token')
             }
         })
             .then(response => response.json())
@@ -58,8 +59,9 @@ class Profile extends React.Component {
     return() {
         this.props.history.push("/game");
     }
-    edit(){
+    edit(userId){
         //change user data if allowed
+        this.props.history.push("/edit/"+ userId);
     }
 
     render() {
@@ -75,15 +77,17 @@ class Profile extends React.Component {
                         <p>Birthday: {this.state.user.birthday}</p>
                         <p>Status: {this.state.user.status}</p>
                         <Button
-                            width="50%"
-                            onClick={()=>{
-                                this.edit();
-                            }}
-                            >
+                                width="50%"
+                                onClick={()=>{
+                                    this.edit(this.props.match.params.id);
+                                }}
+                        >
                             Edit
                         </Button>
+
+
                         <Button
-                            width="100%"
+                            width="80%"
                             onClick={() => {
                                 this.return();
                             }}
